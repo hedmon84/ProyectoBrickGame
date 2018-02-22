@@ -7,6 +7,7 @@ brick::brick() {
 
 }
 
+
 void brick:: newline() {
 	
 		cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
@@ -111,7 +112,10 @@ void brick::carro() {
 
 		//Corro el mapa
 		for (int i = 0; i < 20; ++i) {
+				
+
 			for (int j = 0; j < 20; ++j) {
+				
 				cout << map[i][j];
 				if (j >= 19) {
 					cout << endl;
@@ -127,7 +131,7 @@ void brick::carro() {
 
 		}
 
-		velocidad = timer - 200;
+		velocidad = timer +20;
 
 		cout << "    Time: " << timer + (cashpickedup * 10);
 		cout << "    vida: "<<   health;
@@ -138,11 +142,30 @@ void brick::carro() {
 
 		//reloj
 
+		
 
 
 			
 		
 		//moves the car to the left
+
+		bool carrro;
+		if (GetAsyncKeyState(VK_UP)) {
+
+			carrro = true;
+			speed -= 10;
+
+		}
+		else carrro = false;
+
+
+
+	
+
+			
+
+
+
 		if (GetAsyncKeyState(VK_LEFT)) {
 			if (map[y][x - 3] == obstacle) {
 				goto lost;
@@ -196,25 +219,52 @@ void brick::carro() {
 		lost:
 			cin.get();
 			health = health - 1;
+
+			vidas += 1;
+
 			cout << "\n\nYou crashed!\n" << endl;
+			y = 17, x = 9;
+			system("pause");
+			system("cls");
 
 			
-			
-			break;
-			
-		}
+			for (int i = 16; i < 19; i++) {
+				for (int j = 2; j < 18; ++j) {
+
+					map[i][j] = ' ';
+
+				} 
+			}
+			if (health == 0) {
+
+				
+				cout << "\n\nYou Lost!\n" << endl;
+				health == 0;
+				break;
+			}
+
+						
+		 }
+
+		
+
+		 if (carrro == true) {
+			 speed = 10;
+		 }
+		 else speed = 60;
 		
 		
 		//speeds up the obstacles each time the player gets another 100 points
 		++timer;
 		if (timer == 20 || timer == 40 || timer == 60 || timer == 80 || timer == 100 || timer == 120 || timer == 140 || timer == 160 || timer == 170 || timer == 180) {
 			speed -= 10;
+
 		}
 		Sleep(speed);
 
 		manageScore();
 		level();
-
+		
 		
 		
 	
@@ -274,49 +324,50 @@ void brick::manageScore() {
 void brick::level() {
 
 
-	if (timer == 20) {
+	if (timer == 150) {
 		nivel += 1;
 	}
-	if (timer == 40) {
+	if (timer == 250) {
 		nivel += 1;
 		
 	}
 
-	if (timer == 60) {
+	if (timer == 350) {
 		nivel += 1;
 	}
 
-	if (timer == 80) {
+	if (timer == 400) {
 		nivel += 1;
 	}
 
-	if (timer == 100) {
+	if (timer == 500) {
 		nivel += 1;
 	}
 
-	if (timer == 120) {
+	if (timer == 550) {
 		nivel += 1;
 	}
 
-	if (timer == 140) {
+	if (timer == 600) {
 		nivel += 1;
 	}
 
-	if (timer == 160) {
+	if (timer == 700) {
 		nivel += 170;
 	}
 
-	if (timer == 180) {
+	if (timer == 800) {
 		nivel += 1;
 	}
 
-	if (timer == 200) {
+	if (timer == 900) {
 		nivel += 1;
 	}
 	
-	else if (nivel == 10) {
-		nivel = 0;
+	if (nivel < 1000) {
+		nivel == 0;
 	}
+
 
 
 }
@@ -326,8 +377,7 @@ void brick::board() {
 	cout << "Estadisticas de juego \n";
 	cout << "Puntos conseguidos : " << score << endl;
 	cout << "Velocidad alcanzada: " << velocidad << endl;
-	cout << "muertas: " << health << endl;
+	cout << "muertas: " << vidas << endl;
 	cout << endl ;
-
 
 }

@@ -16,10 +16,9 @@ class brick {
 	
 public:
 	brick();
-
 	void board();
-	void newline();
 	void mapa();
+	void newline();
 	void carro();
 	void manageScore();
 	void  level();
@@ -31,10 +30,14 @@ public:
 
 
 protected:
-	int tmp = 3;
 
+	int tmp = 3;
+	int segundo = 0;
+	int t = 1;
 	char map[25][25];
 	int y = 17, x = 9;
+
+	int vidas = 0;
 	int a = 0, b = rand() % 15 + 2;
 	int timer = 0;
 	int speed = 100;
